@@ -32,25 +32,26 @@ def get_data():
         df_today = pd.read_csv(PATH_DATA, sep=';')
 
         key_mat = list(student.keys())[0]
-        student_id_person = student[key_mat]['idPerson']
+        student_id_user = student[key_mat]['idUser']
         student_name = student[key_mat]['nome']
         student_name = student_name.split(' ')
         student_name = student_name[0] + ' ' + student_name[-1]
         today, time, date = get_today_info()
         for studant_class in student[key_mat]['horarios'].get(today):
             class_id = studant_class['idClass']
+            subject_id = studant_class['idSubject']
             class_name = studant_class['subjectName']
             start = studant_class['hourStart']
             end = studant_class['hourEnd']
             if start <= time and end >= time:
-                if df_today[(df_today['idPerson'] == student_id_person) & (df_today['idClass'] == class_id)].empty:
+                if df_today[(df_today['idPerson'] == student_id_user) & (df_today['idClass'] == class_id)].empty:
                     print(4)
                     status = 0
-                    df_today = df_today._append({'date':date, 'weekday':today, 'idPerson':student_id_person, 'idClass':class_id,'start':start, 'end':end, 'startTime':time, 'status':status}, ignore_index=True)
+                    df_today = df_today._append({'date':date, 'weekday':today, 'idUser':student_id_user, 'idClass':class_id, 'idSubject':subject_id, 'start':start, 'end':end, 'startTime':time, 'status':status}, ignore_index=True)
                     break
                 else:
                     print(5)
-                    df_today.loc[df_today['idPerson'] == student_id_person, 'endTime'] = time
+                    df_today.loc[df_today['idPerson'] == student_id_user, 'endTime'] = time
                     break
         class_name = class_name if class_name != None else 'disciplina nao identificada'
         print(df_today)
