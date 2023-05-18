@@ -35,7 +35,7 @@ def create_app():
     from auth import auth as auth_blueprint
     aplication.register_blueprint(auth_blueprint)
     # blueprint for non-auth parts of app
-    from app.app import main as main_blueprint
+    from app import main as main_blueprint
     aplication.register_blueprint(main_blueprint)
     # blueprint for non-auth parts of app
     from freq import freq as freq_blueprint
