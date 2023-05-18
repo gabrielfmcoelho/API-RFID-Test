@@ -4,6 +4,7 @@ import datetime
 from datetime import datetime as dt
 import pandas as pd
 import os
+from sendfreq import run_script
 
 dict_uid_translation = {
     '95A2A353':'b58a5a58',
@@ -34,6 +35,8 @@ def validade_time(start, end, time, minutes=15):
     end = dt.strptime(end, "%H:%M")
     end = end + datetime.timedelta(minutes=minutes)
     end = end.strftime("%H:%M")
+
+    print(start, end, time)
 
     if start <= time and end >= time:
         return True
@@ -84,3 +87,6 @@ def get_data():
     student_name = student_name if student_name != None else 'aluno nao identificado'
     return jsonify([0, class_name, student_name, translated_hash, 0])
 
+@freq.route('/enviarfrequencia', methods=['GET'])
+def sendfreq():
+    run_script()
