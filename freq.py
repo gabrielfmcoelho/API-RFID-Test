@@ -48,7 +48,7 @@ PATH_DATA = './data/today.csv'
 def get_data():
     rfid_hash = request.args.get('cardData')
 
-    translated_hash = str(bytes.fromhex(rfid_hash).decode('utf-8'))
+    translated_hash = str(bytes.fromhex(rfid_hash))
 
     translated_hash = dict_uid_translation.get(translated_hash)
 
