@@ -51,7 +51,7 @@ def get_data():
     translated_hash = str(bytes.fromhex(rfid_hash))
     translated_hash = translated_hash.replace('b', '')
     translated_hash = translated_hash.replace("'", '')
-    translated_hash = dict_uid_translation.get(translated_hash)
+    translated_hash = dict_uid_translation.get(rfid_hash)
 
     students = get_students_json(API_ROUTE)
     student = students.get(translated_hash)
