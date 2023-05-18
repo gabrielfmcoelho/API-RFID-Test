@@ -5,6 +5,11 @@ from datetime import datetime as dt
 import pandas as pd
 import os
 
+dict_uid_translation = {
+    '95A2A353':'b58a5a58',
+    'b58a5a58':'b58a5a58',
+}
+
 freq = Blueprint('freq', __name__)
 
 API_ROUTE = "http://45.56.120.227/api/v1/json"
@@ -41,6 +46,9 @@ def get_data():
     rfid_hash = request.args.get('cardData')
 
     translated_hash = str(bytes.fromhex(rfid_hash).decode('utf-8'))
+
+    translated_hash = dict_uid_translation.get(translated_hash)
+
     students = get_students_json(API_ROUTE)
     student = students.get(translated_hash)
     if student != None:
