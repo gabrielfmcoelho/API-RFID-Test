@@ -7,7 +7,7 @@ import os
 from sendfreq import run_script
 
 dict_uid_translation = {
-    '95A2A353':'b58a5a58',
+    '95a2a353':'b58a5a58',
     'b58a5a58':'b58a5a58',
 }
 
